@@ -17,9 +17,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace TopDownShooter
 {
-    /// <summary>
-    /// This is the main type for your game.
-    /// </summary>
+
     public class Main : Game
     {
         GraphicsDeviceManager graphics;
@@ -37,8 +35,8 @@ namespace TopDownShooter
 
         protected override void Initialize()
         {
-            Globals.screenWidth = 800; //1600
-            Globals.screenHeight = 500; //900
+            Globals.screenWidth = 1600; 
+            Globals.screenHeight = 900; 
 
             graphics.PreferredBackBufferWidth = Globals.screenWidth;
             graphics.PreferredBackBufferHeight = Globals.screenHeight;

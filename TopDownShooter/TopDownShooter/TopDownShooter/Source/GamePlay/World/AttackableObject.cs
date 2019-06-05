@@ -16,36 +16,40 @@ using Microsoft.Xna.Framework.Media;
 
 namespace TopDownShooter
 {
-    public class Mob : Unit
+    public class AttackableOBject : Basic2d
     {
+        public bool dead;
 
+        public int ownerId;
 
-        public Mob(string PATH, Vector2 POS, Vector2 DIMS, int OWNERID)
-            : base(PATH, POS, DIMS, OWNERID)
+        public float speed, hitDist, health, healthMax;
+
+        public AttackableOBject(string PATH, Vector2 POS, Vector2 DIMS, int OWNERID) : base(PATH, POS, DIMS)
         {
+            ownerId = OWNERID;
+            dead = false;
             speed = 2.0f;
+
+            health = 1;
+            healthMax = health;
+
+            hitDist = 35.0f;
         }
 
-        public override void Update(Vector2 OFFSET, Player ENEMY)
+        public virtual void Update(Vector2 OFFSET, Player ENEMY)
         {
-            AI(ENEMY.hero);
-
             base.Update(OFFSET);
         }
 
-        public virtual void AI(Hero HERO)
+        public virtual void GetHit(float DAMAGE)
         {
-            pos += Globals.RadialMovement(HERO.pos, pos, speed);
-            rot = Globals.RotateTowards(pos, HERO.pos);
+            health -= DAMAGE;
 
-            if (Globals.GetDistance(pos, HERO.pos) < 15)
+            if (health <= 0)
             {
-                HERO.GetHit(1);
-                dead = true;
+            dead = true;
             }
-
         }
-        
 
         public override void Draw(Vector2 OFFSET)
         {

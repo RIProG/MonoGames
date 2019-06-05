@@ -16,14 +16,16 @@ using Microsoft.Xna.Framework.Media;
 
 namespace TopDownShooter
 {
-    public class Imp : Mob
+    public class Spiderling : Mob
     {
 
+        public McTimer spawnTimer;
 
-        public Imp(Vector2 POS, int OWNERID) 
-            : base("2d\\Units\\Mobs\\Imp", POS, new Vector2(40,40), OWNERID)
+        public Spiderling(Vector2 POS, int OWNERID) 
+            : base("2d\\Units\\Mobs\\Spider", POS, new Vector2(25,25), OWNERID)
         {
-            speed = 2.0f;
+            speed = 2.5f;
+
         }
 
         public override void Update(Vector2 OFFSET, Player ENEMY)
@@ -31,7 +33,7 @@ namespace TopDownShooter
 
             base.Update(OFFSET, ENEMY);
         }
-        
+
 
         public override void Draw(Vector2 OFFSET)
         {

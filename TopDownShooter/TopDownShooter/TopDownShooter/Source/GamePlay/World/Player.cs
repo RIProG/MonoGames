@@ -18,13 +18,14 @@ namespace TopDownShooter
 {
     public class Player
     {
+        public int id;
         public Hero hero;
         public List<Unit> units = new List<Unit>();
         public List<SpawnPoint> spawnPoints = new List<SpawnPoint>();
 
-        public Player()
+        public Player(int ID)
         {
-
+            id = ID;
         }
 
         public virtual void Update(Player ENEMY, Vector2 OFFSET)
@@ -38,6 +39,12 @@ namespace TopDownShooter
             for (int i = 0; i < spawnPoints.Count; i++)
             {
                 spawnPoints[i].Update(OFFSET);
+
+                if (spawnPoints[i].dead)
+                {
+                    spawnPoints.RemoveAt(i);
+                    i--;
+                }
 
             }
 
@@ -57,7 +64,16 @@ namespace TopDownShooter
 
         public virtual void AddUnit(object INFO)
         {
+            Unit tempUnit = (Unit)INFO; //
+            tempUnit.ownerId = id; // Not required, helps reducing bugs
             units.Add((Unit)INFO);
+        }
+
+        public virtual void AddSpawnPoint(object INFO)
+        {
+            SpawnPoint tempSpawnPoint = (SpawnPoint)INFO; //
+            tempSpawnPoint.ownerId = id; // Not required, helps reducing bugs
+            spawnPoints.Add((SpawnPoint)INFO);
         }
 
         public virtual void ChangeScore(int SCORE)
