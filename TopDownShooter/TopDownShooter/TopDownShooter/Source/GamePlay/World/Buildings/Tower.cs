@@ -16,21 +16,28 @@ using Microsoft.Xna.Framework.Media;
 
 namespace TopDownShooter
 {
-    public class User : Player
+    public class Tower : Building
     {
+       
 
-        public User(int ID) : base(ID)
+        public Tower(Vector2 POS, int OWNERID)
+            : base("2d\\Buildings\\Tower", POS, new Vector2(45,45), OWNERID)
         {
-            hero = new Hero("2d\\Hero", new Vector2(300, 300), new Vector2(64, 64), id);
+            health = 20;
+            healthMax = health;
 
-            buildings.Add(new Tower(new Vector2(Globals.screenWidth/2, Globals.screenHeight - 40), id));
+            hitDist = 35.0f;
         }
 
-        public override void Update(Player ENEMY, Vector2 OFFSET)
+        public virtual void Update(Vector2 OFFSET, Player ENEMY)
         {
-            base.Update(ENEMY, OFFSET);
+            base.Update(OFFSET);
         }
 
 
+        public override void Draw(Vector2 OFFSET)
+        {
+            base.Draw(OFFSET);
+        }
     }
 }

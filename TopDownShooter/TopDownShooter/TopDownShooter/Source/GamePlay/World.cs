@@ -27,6 +27,7 @@ namespace TopDownShooter
         public AIPlayer aIPlayer;
 
         public List<Projectile2d> projectiles = new List<Projectile2d>();
+        public List<AttackableOBject> allObjects = new List<AttackableOBject>();
 
         PassObject ResetWorld;
 
@@ -51,8 +52,12 @@ namespace TopDownShooter
 
         public virtual void Update()
         {
-            if (!user.hero.dead)
+            if (!user.hero.dead && user.buildings.Count > 0)
             {
+
+                allObjects.Clear();
+                allObjects.AddRange(user.GetAllObjects());
+                allObjects.AddRange(aIPlayer.GetAllObjects());
 
                 user.Update(aIPlayer, offset);
                 aIPlayer.Update(user, offset);
@@ -60,7 +65,7 @@ namespace TopDownShooter
 
                 for (int i = 0; i < projectiles.Count; i++)
                 {
-                    projectiles[i].Update(offset, aIPlayer.units.ToList<Unit>());
+                    projectiles[i].Update(offset, allObjects);
 
                     if (projectiles[i].done)
                     {
@@ -74,7 +79,7 @@ namespace TopDownShooter
             }
             else
             {
-                if (Globals.keyboard.GetPress("Enter"))
+                if (Globals.keyboard.GetPress("Enter") && (user.hero.dead || user.buildings.Count <= 0))
                 {
                     ResetWorld(null);
                 }

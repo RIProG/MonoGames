@@ -25,7 +25,7 @@ namespace TopDownShooter
        
         }
 
-        public override void Update(Vector2 OFFSET, List<Unit> UNITS)
+        public override void Update(Vector2 OFFSET, List<AttackableOBject> UNITS)
         {
             base.Update(OFFSET, UNITS);
 

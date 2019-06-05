@@ -26,6 +26,12 @@ namespace TopDownShooter
         {
             totalSpawns = 0;
             maxSpawns = 3;
+
+
+            health = 3;
+            healthMax = health;
+
+            spawnTimer = new McTimer(3000);
         }
 
         public override void Update(Vector2 OFFSET)

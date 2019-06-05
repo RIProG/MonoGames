@@ -16,36 +16,21 @@ using Microsoft.Xna.Framework.Media;
 
 namespace TopDownShooter
 {
-    public class Mob : Unit
+    public class Building : AttackableOBject
     {
+       
 
-
-        public Mob(string PATH, Vector2 POS, Vector2 DIMS, int OWNERID)
+        public Building(string PATH, Vector2 POS, Vector2 DIMS, int OWNERID)
             : base(PATH, POS, DIMS, OWNERID)
         {
-            speed = 2.0f;
+
         }
 
-        public override void Update(Vector2 OFFSET, Player ENEMY)
+        public virtual void Update(Vector2 OFFSET, Player ENEMY)
         {
-            AI(ENEMY);
-
             base.Update(OFFSET);
         }
 
-        public virtual void AI(Player ENEMY)
-        {
-            pos += Globals.RadialMovement(ENEMY.hero.pos, pos, speed);
-            rot = Globals.RotateTowards(pos, ENEMY.hero.pos);
-
-            if (Globals.GetDistance(pos, ENEMY.hero.pos) < 15)
-            {
-                ENEMY.hero.GetHit(1);
-                dead = true;
-            }
-
-        }
-        
 
         public override void Draw(Vector2 OFFSET)
         {

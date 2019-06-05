@@ -19,7 +19,7 @@ namespace TopDownShooter
     public class SpawnPoint : AttackableOBject
     {
 
-        public McTimer spawnTimer = new McTimer(2200);
+        public McTimer spawnTimer = new McTimer(2400);
 
         public SpawnPoint(string PATH, Vector2 POS, Vector2 DIMS, int OWNERID)
             : base(PATH, POS, DIMS, OWNERID)

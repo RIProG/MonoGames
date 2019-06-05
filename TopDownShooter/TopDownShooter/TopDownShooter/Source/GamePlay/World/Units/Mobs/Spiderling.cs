@@ -21,8 +21,8 @@ namespace TopDownShooter
 
         public McTimer spawnTimer;
 
-        public Spiderling(Vector2 POS, int OWNERID) 
-            : base("2d\\Units\\Mobs\\Spider", POS, new Vector2(25,25), OWNERID)
+        public Spiderling(Vector2 POS, int OWNERID)
+            : base("2d\\Units\\Mobs\\Spider", POS, new Vector2(25, 25), OWNERID)
         {
             speed = 2.5f;
 
@@ -32,6 +32,34 @@ namespace TopDownShooter
         {
 
             base.Update(OFFSET, ENEMY);
+        }
+
+        public override void AI(Player ENEMY)
+        {
+            Building temp = null;
+            for (int i = 0; i < ENEMY.buildings.Count; i++)
+            {
+                if (ENEMY.buildings[i].GetType().ToString() == "TopDownShooter.Tower") //Namespace.Class
+                {
+                    temp = ENEMY.buildings[i];
+                }
+            }
+
+            if (temp != null) // Error check to avoid crash
+            {
+                pos += Globals.RadialMovement(temp.pos, pos, speed);
+                rot = Globals.RotateTowards(pos, temp.pos);
+
+                if (Globals.GetDistance(pos, temp.pos) < 15)
+                {
+                    temp.GetHit(1);
+                    dead = true;
+                }
+
+            }
+
+
+
         }
 
 
